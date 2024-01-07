@@ -1,0 +1,5 @@
+repository:
+  name: MineTime
+  description: MineTime restricts Minecraft servers to a schedule; making them joinable only at certain times.
+  homepage: https://github.com/regulad/MineTime
+  default_branch: master

@@ -1,0 +1,22 @@
+# Choose a timezone for the server to use. If left empty, the plugin will try to get the timezone from the server.
+# If this fails, a default of UTC will be used.
+timezone: "America/New_York"
+
+# Choose a locale for the server to use. If left empty, the plugin will try to get the locale from the server.
+locale: "en_US"
+
+invert: false  # If this is true, the plugin will invert the schedule. This means that the server will be joinable at all times except for the times defined in the schedule.
+
+# The message to display to players when they try to join the server outside of the schedule.
+message:
+  - "&cThe server is currently closed."
+  - "&cPlease try again later."
+
+# The schedule is a list of times that the server will be joinable.
+# The format is as follows: each entry into the list below is an object with two fields: "cron" and "time".
+# The "cron" field is a quartz cron expression (https://www.freeformatter.com/cron-expression-generator-quartz.html) that defines when the server will be joinable.
+# The "time" field defines how long the server will be joinable for.
+# !! All cron jobs use the above timezone! They do not use UTC unless you set it to UTC! !!
+schedule:
+  - cron: "0 30 20 ? * * *"  # Every day at 8:30 PM
+    time: "PT2H30M"  # The server will be joinable for 2 hours and 30 minutes.

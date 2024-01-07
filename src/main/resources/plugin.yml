@@ -1,0 +1,58 @@
+name: MineTime
+version: 1.0-SNAPSHOT
+main: xyz.regulad.minetime.MineTimeBukkit
+description: MineTime restricts Minecraft servers to a schedule; making them joinable only at certain times.
+author: regulad
+website: https://github.com/regulad/MineTime
+api-version: '1.20'
+
+permissions:
+  minetime.*:
+    description: Gives access to all MineTime commands.
+    default: op
+    children:
+      - minetime.bypass
+      - minetime.reload
+      - minetime.schedule
+      - minetime.on
+      - minetime.off
+  minetime.bypass:
+    description: Allows the player to bypass time restrictions.
+    default: op
+  minetime.reload:
+    description: Allows the player to reload the plugin.
+    default: op
+  minetime.schedule:
+    description: Allows the player to view the schedule.
+    default: true
+  minetime.on:
+    description: Allows the player to turn on the schedule.
+    default: op
+  minetime.off:
+    description: Allows the player to turn off the schedule.
+    default: op
+
+commands:
+  mtreload:
+    description: Reloads the plugin.
+    usage: /<command>
+    permission: minetime.reload
+  mtschedule:
+    description: Shows the current schedule.
+    usage: /<command>
+    permission: minetime.schedule
+    aliases: [sch, schedule]
+  mton:
+    description: Turns on the schedule.
+    usage: /<command>
+    permission: minetime.on
+  mtoff:
+    description: Turns off the schedule.
+    usage: /<command>
+    permission: minetime.off
+
+softdepend:
+  - PlaceholderAPI
+
+libraries:
+  - com.cronutils:cron-utils:9.2.0
