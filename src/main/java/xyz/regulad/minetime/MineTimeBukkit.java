@@ -108,11 +108,14 @@ public class MineTimeBukkit extends JavaPlugin {
     }
 
     private @NotNull Optional<@NotNull ScheduleSlot> getCurrentScheduleSlotForTime(final @NotNull ZonedDateTime time) {
+        if (!scheduleEnabled || !loginPermittedDuringTime(time)) {
+            return Optional.empty(); // no current schedule slot
+        }
         return config.getScheduleSlots().stream().max(Comparator.comparing(s -> s.getExecutionTime().lastExecution(time).orElse(NEVER_PAST))).filter(s -> s.getExecutionTime().lastExecution(time).isPresent());
     }
 
     private @NotNull Optional<@NotNull Duration> getTimeRemainingForCurrentScheduleSlotForTime(final @NotNull ZonedDateTime time) {
-        return getCurrentScheduleSlotForTime(time).map(scheduleSlot -> Duration.between(scheduleSlot.getExecutionTime().lastExecution(time).orElse(NEVER_PAST), time));
+        return getCurrentScheduleSlotForTime(time).map(scheduleSlot -> Duration.between(time, scheduleSlot.getExecutionTime().lastExecution(time).orElse(NEVER_PAST).plus(scheduleSlot.getDuration())));
     }
 
     public @NotNull Optional<@NotNull Duration> getTimeRemainingForCurrentScheduleSlot() {

@@ -44,7 +44,11 @@ public class MineTimeScheduleCommand implements CommandExecutor {
             final @NotNull Optional<@NotNull Duration> timeUntilOpen = plugin.getTimeRemainingUntilNextScheduleSlot();
             timeUntilOpen.ifPresent(duration -> components.add(Component.text("The server will open in ").color(NamedTextColor.YELLOW).append(Component.text(describeDuration(duration)).color(NamedTextColor.GREEN))));
         }
-        components.add(Component.text("Schedule:").color(NamedTextColor.YELLOW));
+        if (!plugin.getConfig().getBoolean("invert")) {
+            components.add(Component.text("The server is open during:").color(NamedTextColor.YELLOW));
+        } else {
+            components.add(Component.text("The server is closed during:").color(NamedTextColor.YELLOW));
+        }
         components.add(Component.text("All times are in " + plugin.getNow().getZone().getDisplayName(TextStyle.FULL, plugin.config.localeOrDefault()) + ".").color(NamedTextColor.RED));
         // see https://github.com/jmrozanec/cron-utils/blob/d31697ec4c30d4f43a1b528e5781d1d00ea1c967/src/main/java/com/cronutils/model/time/ExecutionTime.java#L122
         for (final @NotNull ScheduleSlot slot : plugin.config.getScheduleSlots()) {

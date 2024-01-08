@@ -9,8 +9,9 @@ invert: false  # If this is true, the plugin will invert the schedule. This mean
 
 # The message to display to players when they try to join the server outside of the schedule.
 message:
-  - "&cThe server is currently closed."
-  - "&cPlease try again later."
+  - "&cThe server is now closed."
+  - "&cPlease check the schedule to see when it will be open next."
+  - "&cYou can view the schedule by typing &6/schedule&c while the server is online."
 
 # The schedule is a list of times that the server will be joinable.
 # The format is as follows: each entry into the list below is an object with two fields: "cron" and "time".
